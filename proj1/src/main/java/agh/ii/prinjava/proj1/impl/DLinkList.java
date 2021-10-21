@@ -1,7 +1,7 @@
 package agh.ii.prinjava.proj1.impl;
 
 public class DLinkList<E> {
-    private Node<E> first; //first element added
+    private Node<E> first = new Node<E>();
     private static class Node<T> {
         T elem;
         Node<T> next;
@@ -9,6 +9,7 @@ public class DLinkList<E> {
     }
 
     public boolean isEmpty() {
+
         return first.elem == null;
     }
 
@@ -17,18 +18,18 @@ public class DLinkList<E> {
      * @param elem
      */
 
-    public void addFirst (E elem){
-        if (isEmpty()){
-            first.elem = elem;
-            first.next = null;
-            first.prev = null;
-        }
-        else {
-            Node<E> newNode = new Node<E>();
+    public void addFirst(E elem){
+
+        if (!isEmpty()){
+            Node<E> newNode = new Node<>();
+            newNode.elem = elem;
             newNode.next = first;
             first.prev = newNode;
-            newNode.elem = elem;
             first = newNode;
+        }
+
+        else{
+            first.elem = elem;
         }
     }
 
@@ -43,8 +44,9 @@ public class DLinkList<E> {
             first.next = null;
             first.prev = null;
         }
-        else {
-            Node<E> temp = first;
+        else{
+            Node<E> temp = new Node<E>();
+            temp = first;
             while (temp.next != null){
                 temp = temp.next;
             }
@@ -61,15 +63,18 @@ public class DLinkList<E> {
      * returns the deleted node
      */
 
-    public E removeFirst (){
-        Node<E> toDelete = first;
-        if (!isEmpty() || first.next != null) {
-            first.prev = null;
-            return toDelete.elem;
+    public E removeFirst(){
+        Node<E> delete = first;
+        if(isEmpty()) {
+            return null;
+        }
+        else if(first.next==null){
+            first = null;
+            return delete.elem;
         }
         first = first.next;
         first.prev = null;
-        return toDelete.elem;
+        return delete.elem;
     }
 
     /**
@@ -78,30 +83,50 @@ public class DLinkList<E> {
      * returns the deleted node
      */
 
-    public E removeLast (){
-        Node<E> toDelete = first;
-        if (!isEmpty() || first.next != null) {
-            first.prev = null;
-            return toDelete.elem;
+    public E removeLast(){
+        Node<E> delete = first;
+        if(isEmpty()) {
+            return null;
         }
-        while (toDelete.next != null){
-            toDelete = toDelete.next;
+        while(delete.next !=null){
+            delete = delete.next;
         }
-        Node<E> temp = toDelete.prev;
-        temp.next = null;
-        return toDelete.elem;
+        Node<E> temp = delete.prev;
+        temp.next=null;
+        return delete.elem;
     }
+
+    public E getLast(){
+        Node<E> temp = first;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        return temp.elem;
+    }
+
+    /**
+     *
+     * @return tostring
+     * converts a node into a string
+     */
 
     @Override
     public String toString() {
         Node<E> temp = first;
-        String tostring = "DlinkList";
-        while (temp.next != null) {
-            tostring += temp.elem + " / ";
-            temp = temp.next;
+        String stringnode = "DLinkList{ ";
+        if (!isEmpty()) {
+            while (temp != null) {
+                stringnode += temp.elem + " ";
+                temp = temp.next;
+            }
         }
-        return tostring + "}";
+        return stringnode + "}";
     }
+
+    /**
+     *
+     * @return int, the number of elements in the list
+     */
 
     int numOfElems(){
         if(first.elem == null){
@@ -118,12 +143,16 @@ public class DLinkList<E> {
         }
     }
 
-    public E peek (){
-        if  (!isEmpty()){
+    /**
+     *
+     * @return the first node of the list without deleting it
+     */
+
+    public E peek(){
+        if (!isEmpty()){
             return first.elem;
         }
-        throw new IllegalStateException("Nothing here");
-
+        throw new RuntimeException("null");
     }
 
 }

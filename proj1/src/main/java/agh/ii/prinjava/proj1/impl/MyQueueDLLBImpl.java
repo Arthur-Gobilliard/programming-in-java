@@ -3,7 +3,7 @@ package agh.ii.prinjava.proj1.impl;
 import agh.ii.prinjava.proj1.MyQueue;
 
 public class MyQueueDLLBImpl<E> implements MyQueue<E> {
-    private DLinkList<E> elems;
+    private DLinkList<E> elems = new DLinkList<>();
 
     /**
      * adds an element at the beginning of the list
@@ -12,9 +12,7 @@ public class MyQueueDLLBImpl<E> implements MyQueue<E> {
 
     @Override
     public void enqueue(E x) {
-
         elems.addFirst(x);
-
     }
 
     /**
@@ -48,9 +46,20 @@ public class MyQueueDLLBImpl<E> implements MyQueue<E> {
      */
 
     @Override
-    public E peek() {
+    public E peek(){
+        if (!isEmpty()){
+            return elems.getLast();
+        }
+        throw new RuntimeException("null");
+    }
 
-        return elems.peek();
+    /**
+     *
+     * @return a tring of the queue
+     */
 
+    @Override
+    public String toString(){
+        return "Queue{" + elems.toString() + "}";
     }
 }

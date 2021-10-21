@@ -19,18 +19,39 @@ class MyQueueDLLBImplTest {
     }
 
     @Test
-    void enqueue() {
+    void enqueueTest() {
+        MyQueue<Integer> queueOfInts = MyQueue.create();
+        queueOfInts.enqueue(1);
+        queueOfInts.enqueue(2);
+        queueOfInts.enqueue(3);
+        assertEquals("Queue{DLinkList{ 3 2 1 }}", queueOfInts.toString());
     }
 
     @Test
-    void dequeue() {
+    void dequeueTest() {
+        MyQueue<Integer> queueOfInts = MyQueue.create();
+        queueOfInts.enqueue(1);
+        queueOfInts.enqueue(2);
+        queueOfInts.enqueue(3);
+        queueOfInts.dequeue();
+        assertEquals("Queue{DLinkList{ 3 2 }}", queueOfInts.toString());
     }
 
     @Test
-    void numOfElems() {
+    void numOfElemsTest() {
+        MyQueue<Integer> queueOfInts = MyQueue.create();
+        queueOfInts.enqueue(1);
+        queueOfInts.enqueue(2);
+        queueOfInts.enqueue(3);
+        assertEquals(3, queueOfInts.numOfElems());
     }
 
     @Test
-    void peek() {
+    void peekTest() {
+        MyQueue<Integer> queueOfInts = MyQueue.create();
+        queueOfInts.enqueue(1);
+        queueOfInts.enqueue(2);
+        queueOfInts.enqueue(3);
+        assertEquals(1, queueOfInts.peek());
     }
 }

@@ -4,7 +4,7 @@ import agh.ii.prinjava.proj1.MyStack;
 import org.w3c.dom.Node;
 
 public class MyStackDLLBImpl<E> implements MyStack<E> {
-    private DLinkList<E> elems;
+    private DLinkList<E> elems = new DLinkList<>();
 
     /**
      *deletes the last element
@@ -13,11 +13,10 @@ public class MyStackDLLBImpl<E> implements MyStack<E> {
 
     @Override
     public E pop() {
-
         if (!elems.isEmpty()){
             return elems.removeLast();
         }
-        throw new IllegalStateException("no value left");
+        throw new RuntimeException("null");
     }
 
     /**
@@ -27,11 +26,8 @@ public class MyStackDLLBImpl<E> implements MyStack<E> {
 
     @Override
     public void push(E x) {
-
         elems.addLast(x);
-
     }
-
     /**
      * returns numer of ints
      * @return int
@@ -39,9 +35,7 @@ public class MyStackDLLBImpl<E> implements MyStack<E> {
 
     @Override
     public int numOfElems() {
-
         return elems.numOfElems();
-
     }
 
     /**
@@ -51,8 +45,16 @@ public class MyStackDLLBImpl<E> implements MyStack<E> {
 
     @Override
     public E peek() {
-
         return elems.peek();
+    }
 
+    /**
+     *
+     * @return string of the stack
+     */
+
+    @Override
+    public String toString(){
+        return "Stack{" + elems.toString() + "}";
     }
 }
